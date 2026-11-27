@@ -119,6 +119,7 @@ div[class*="st-key-obcard"], div[data-testid="stVerticalBlockBorderWrapper"] {{ 
 .ob-foot a {{ color: #c9bff2; text-decoration: none; }}
 .ob-done {{ background: #fff; border: 1px solid #e3dff0; border-radius: 14px; padding: 30px; text-align: center; }}
 .ob-done h2 {{ color: {PURPLE}; margin: 6px 0 8px; }}
+[data-testid="InputInstructions"] {{ display: none !important; }}
 label, .stRadio label p, .stCheckbox label p {{ font-weight: 600 !important; color: #2b2840 !important; }}
 </style>
 """,
@@ -341,6 +342,12 @@ with st.container(border=True, key="obcard3"):
         height=110,
         key="welcome",
     )
+    ring = st.select_slider(
+        "How long should phones ring before going to voicemail?",
+        options=[10, 15, 20, 25, 30, 40, 50, 60],
+        value=20,
+        format_func=lambda s: f"{s} seconds",
+    )
 
     suggest(
         "day_vm",
@@ -370,12 +377,6 @@ with st.container(border=True, key="obcard3"):
             height=120,
             key="night_vm",
         )
-    ring = st.select_slider(
-        "How long should phones ring before going to voicemail?",
-        options=[10, 15, 20, 25, 30, 40, 50, 60],
-        value=20,
-        format_func=lambda s: f"{s} seconds",
-    )
     outage = st.text_input(
         "Emergency divert number",
         help="In the unlikely event of a major service outage, we'll divert your calls here.",
